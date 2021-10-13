@@ -7,7 +7,15 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="lbl_internal_error">Internal error.</string>
+    <string name="lbl_no_internet_connection">No internet connection.</string>
+    <string name="lbl_error_400">Error 400.</string>
+    <string name="lbl_error_401">Error 401.</string>
+    <string name="lbl_client_code_error">Client logic code error.</string>
+    <string name="lbl_connection_time_out">Connection time out</string>
+
     <string name="lbl_item_count">%s items</string>
     <string name="lbl_sort">Sort</string>
     <string name="lbl_filter">Filter</string>
+    <string name="lbl_discount_rate">(-%s)</string>
 </resources>

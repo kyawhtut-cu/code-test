@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.kyawhut.codetest.data.network.response.ProductResponse.Data" />
+
+        <import type="android.view.View.OnClickListener" />
+
+        <variable
+            name="product"
+            type="Data" />
+
+        <variable
+            name="onClickListener"
+            type="OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/iv_product"
+            imageURL="@{product.attributes.defaultImageList[0]}"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorDiscountRate" />
+
+        <ImageView
+            android:id="@+id/action_add_to_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?actionBarItemBackground"
+            android:onClick="@{(v) -> onClickListener.onClick(v)}"
+            android:padding="@dimen/margin_medium_2"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_product"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_add_to_fav" />
+
+        <TextView
+            android:id="@+id/tv_brand_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="@dimen/margin_medium"
+            android:text="@{product.attributes.brandName}"
+            android:textColor="?textColor"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_product"
+            tools:text="Product Name" />
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="@dimen/margin_medium"
+            android:text="@{product.attributes.productName}"
+            android:textColor="?textColor"
+            android:textSize="@dimen/text_regular_2x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_brand_name"
+            tools:text="Product Name" />
+
+        <TextView
+            android:id="@+id/tv_original_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_txt_strike"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{product.attributes.displayOriginalPrice}"
+            android:textColor="?textColor"
+            android:textSize="@dimen/text_regular_2x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
+            tools:text="$3,300" />
+
+        <TextView
+            android:id="@+id/tv_discount_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_small"
+            android:text="@{product.attributes.displayPrice}"
+            android:textColor="?textColor"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_original_price"
+            app:layout_constraintTop_toTopOf="@+id/tv_original_price"
+            tools:text="$3,300" />
+
+        <TextView
+            android:id="@+id/tv_discount_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingHorizontal="@dimen/margin_small"
+            android:text="@{String.format(@string/lbl_discount_rate, product.attributes.saleText)}"
+            android:textColor="@color/colorDiscountRate"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_discount_price"
+            app:layout_constraintTop_toTopOf="@+id/tv_original_price"
+            tools:text="(-20%)" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/item_rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:max="5"
+            android:rating="@{product.attributes.rating}"
+            android:theme="@style/ItemRating"
+            app:layout_constraintStart_toStartOf="@+id/tv_original_price"
+            app:layout_constraintTop_toBottomOf="@+id/tv_original_price"
+            tools:rating="3.5" />
+
+        <TextView
+            android:id="@+id/tv_shades"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="@dimen/margin_medium"
+            android:text="@{product.attributes.variantsCount + ` shades`}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_regular_2x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_rating"
+            tools:text="6 shades" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

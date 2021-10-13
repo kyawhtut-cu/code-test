@@ -55,6 +55,30 @@ data class AttributesResponse(
     val newArrival: Boolean?,
     @SerializedName("sold-out")
     val soldOut: Boolean?,
+    @SerializedName("rating")
+    val rating: Float,
+    @SerializedName("variants-count")
+    val variantsCount: Int,
+    @SerializedName("description")
+    val description: String?,
+    @SerializedName("how-to-text")
+    val howToText: String?,
+    @SerializedName("how-to")
+    val howTo: String?,
+    @SerializedName("benefits")
+    val benefits: String?,
+    @SerializedName("application")
+    val application: String?,
+    @SerializedName("ingredients")
+    val ingredients: String?,
+    @SerializedName("option-type-categories")
+    val optionTypeCategories: List<String>?,
+    @SerializedName("web-url")
+    val webURL: String?,
+    @SerializedName("state")
+    val state: String?,
+    @SerializedName("seo")
+    val seo: HashMap<String, String?>?,
     @SerializedName("position")
     val position: Int?,
     @SerializedName("cart-image-urls")
@@ -71,6 +95,18 @@ data class AttributesResponse(
     val closeupImageList: List<String>?,
     @SerializedName("featured-image-urls")
     val featuredImageList: List<String>?,
+    @SerializedName("featured-variant-id")
+    val featuredVariantID: Int?,
+    @SerializedName("wishlisted")
+    val wishlisted: Boolean?,
+    @SerializedName("waitlisted")
+    val waitlisted: Boolean?,
+    @SerializedName("available-on-modiface")
+    val availableOnModiface: Boolean?,
+    @SerializedName("available-on-findation")
+    val availableOnFindation: Boolean?,
+    @SerializedName("findation-id")
+    val findationID: Any?,
     @SerializedName("size")
     val size: String?,
     @SerializedName("product-name")

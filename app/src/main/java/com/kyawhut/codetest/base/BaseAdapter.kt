@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
  * @author kyawhtut
  * @date 10/13/21
  */
-abstract class BaseAdapter<D> : RecyclerView.Adapter<BaseViewHolder<*, D>>() {
+abstract class BaseAdapter<D>(
+    protected val itemClickListener: (Int, D) -> Unit = { _, _ -> }
+) : RecyclerView.Adapter<BaseViewHolder<*, D>>() {
 
     private val itemList: MutableList<D> = mutableListOf()
 
     override fun onBindViewHolder(holder: BaseViewHolder<*, D>, position: Int) {
-        holder.bind(itemList[position])
+        holder.data = itemList[position]
+        holder.bind()
     }
 
     override fun getItemCount(): Int {
@@ -45,6 +48,12 @@ abstract class BaseAdapter<D> : RecyclerView.Adapter<BaseViewHolder<*, D>>() {
 
     fun get(index: Int): D? {
         return itemList[index]
+    }
+
+    fun clear() {
+        val totalCount = itemList.size
+        itemList.clear()
+        notifyItemRangeRemoved(0, totalCount)
     }
 
 }

@@ -22,4 +22,8 @@
     <style name="Theme.CodeTest.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.CodeTest.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ItemRating" parent="Theme.CodeTest">
+        <item name="colorAccent">@color/colorDiscountRate</item>
+    </style>
 </resources>
