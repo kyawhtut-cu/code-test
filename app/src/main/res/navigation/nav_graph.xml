@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/sale_fragment">
+
+    <fragment
+        android:id="@+id/sale_fragment"
+        android:name="com.kyawhut.codetest.ui.sale.SaleFragment"
+        android:label="@string/sale_fragment_label"
+        tools:layout="@layout/fragment_sale">
+
+        <action
+            android:id="@+id/action_SaleFragment_to_DetailFragment"
+            app:destination="@id/detail_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="com.kyawhut.codetest.ui.detail.DetailFragment"
+        android:label="@string/detail_fragment_label"
+        tools:layout="@layout/fragment_detail">
+
+        <action
+            android:id="@+id/action_DetailFragment_to_SaleFragment"
+            app:destination="@id/sale_fragment" />
+    </fragment>
+</navigation>
