@@ -7,9 +7,19 @@
 
         <import type="android.view.View.OnClickListener" />
 
+        <import type="com.kyawhut.codetest.ui.sale.SaleViewModel" />
+
+        <import type="com.kyawhut.codetest.utils.binding.ViewBindingUtils.LayoutType" />
+
+        <import type="com.kyawhut.codetest.utils.extension.ListenerType" />
+
         <variable
             name="onClickListener"
             type="OnClickListener" />
+
+        <variable
+            name="viewModel"
+            type="SaleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,16 +27,92 @@
         android:layout_height="match_parent"
         tools:context=".ui.sale.SaleFragment">
 
-        <Button
-            android:id="@+id/button_first"
-            android:layout_width="wrap_content"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_total_item_count"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{(v) -> onClickListener.onClick(v)}"
-            android:text="@string/next"
+            android:enabled="false"
+            android:text="@{String.format(@string/lbl_item_count, viewModel.totalItemCount)}"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toStartOf="@+id/btn_sort"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="151 items" />
+
+        <View
+            android:id="@+id/divider_start"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#c9c9c9"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_total_item_count"
+            app:layout_constraintEnd_toStartOf="@+id/btn_sort"
+            app:layout_constraintStart_toEndOf="@+id/btn_total_item_count"
+            app:layout_constraintTop_toTopOf="@+id/btn_total_item_count" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sort"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_sort"
+            app:layout_constraintEnd_toStartOf="@+id/btn_filter"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_total_item_count"
+            app:layout_constraintTop_toTopOf="@+id/btn_total_item_count" />
+
+        <View
+            android:id="@+id/divider_end"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#c9c9c9"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_total_item_count"
+            app:layout_constraintEnd_toStartOf="@+id/btn_filter"
+            app:layout_constraintStart_toEndOf="@+id/btn_sort"
+            app:layout_constraintTop_toTopOf="@+id/btn_total_item_count" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_filter"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_filter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_sort"
+            app:layout_constraintTop_toTopOf="@+id/btn_total_item_count" />
+
+        <View
+            android:id="@+id/divider_bottom"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#c9c9c9"
+            app:layout_constraintEnd_toEndOf="@+id/btn_filter"
+            app:layout_constraintStart_toStartOf="@+id/btn_total_item_count"
+            app:layout_constraintTop_toBottomOf="@+id/btn_total_item_count" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            isLoading="@{viewModel.loadingState.booleanValue()}"
+            refreshListener="@{() -> viewModel.onRefreshListener()}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/divider_bottom">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_item"
+                adapter="@{viewModel.saleAdapter}"
+                itemCount="@{2}"
+                layoutManger="@{LayoutType.GRIDLAYOUT}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/card_sale_item" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

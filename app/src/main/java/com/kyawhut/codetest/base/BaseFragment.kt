@@ -28,6 +28,7 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(), View.OnClickList
         vb = DataBindingUtil.inflate(inflater, layoutID, container, false)
         vb.apply {
             if (onClickListener != -1) setVariable(onClickListener, this@BaseFragment)
+            lifecycleOwner = this@BaseFragment.viewLifecycleOwner
             executePendingBindings()
         }
         return vb.root

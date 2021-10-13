@@ -24,6 +24,7 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity(), View.On
         vb = DataBindingUtil.setContentView(this, layoutID)
         vb.apply {
             if (onClickName != -1) setVariable(onClickName, this@BaseActivity)
+            lifecycleOwner = this@BaseActivity
             executePendingBindings()
         }
     }

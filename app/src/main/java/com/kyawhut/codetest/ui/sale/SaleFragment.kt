@@ -3,11 +3,11 @@ package com.kyawhut.codetest.ui.sale
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.kyawhut.codetest.BR
 import com.kyawhut.codetest.R
 import com.kyawhut.codetest.base.BaseFragmentWithVM
 import com.kyawhut.codetest.databinding.FragmentSaleBinding
+import com.kyawhut.codetest.utils.extension.onLoadMoreEnd
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -27,11 +27,18 @@ class SaleFragment : BaseFragmentWithVM<FragmentSaleBinding, SaleViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        vb.apply {
+            viewModel = vm
+            rvItem.onLoadMoreEnd {
+                vm.onLoadMore()
+            }
+            executePendingBindings()
+        }
     }
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.button_first -> findNavController().navigate(R.id.action_SaleFragment_to_DetailFragment)
         }
     }
 }

@@ -83,6 +83,7 @@ dependencies {
     implementation(Libs.navigationFragmentKtx)
     implementation(Libs.navigationUI)
     implementation(Libs.vectorDrawable)
+    implementation(Libs.swipeRefresh)
 
     // dependency injection
     implementation(Libs.hiltAndroid)

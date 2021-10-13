@@ -17,6 +17,7 @@ object Libs {
     const val material = "com.google.android.material:material:${Versions.materialVersion}"
     const val constraintLayout =
         "androidx.constraintlayout:constraintlayout:${Versions.constraintLayoutVersion}"
+    const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshVersion}"
     const val preferenceKtx = "androidx.preference:preference-ktx:${Versions.preferenceKtxVersion}"
     const val vectorDrawable =
         "androidx.vectordrawable:vectordrawable:${Versions.vectorDrawableVersion}"

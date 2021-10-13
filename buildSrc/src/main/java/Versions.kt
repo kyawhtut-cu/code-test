@@ -21,6 +21,7 @@ object Versions {
     const val appCompactVersion = "1.3.1"
     const val materialVersion = "1.4.0-alpha02"
     const val constraintLayoutVersion = "2.1.0"
+    const val swipeRefreshVersion = "1.2.0-alpha01"
     const val preferenceKtxVersion = "1.1.1"
     const val vectorDrawableVersion = "1.1.0"
     const val navigationVersion = "2.3.5"
