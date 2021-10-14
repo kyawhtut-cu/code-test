@@ -43,7 +43,8 @@ abstract class BaseAdapter<D>(
 
     fun update(index: Int, data: D) {
         itemList.removeAt(index)
-        addItem(index, data)
+        itemList.add(index, data)
+        notifyItemChanged(index)
     }
 
     fun get(index: Int): D? {
