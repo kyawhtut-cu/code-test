@@ -2,4 +2,9 @@
 <resources>
     <attr name="iconColor" format="reference" />
     <attr name="textColor" format="reference" />
+
+    <declare-styleable name="ComponentCarousel">
+        <attr name="autoSlide" format="boolean" />
+        <attr name="sliderMilli" format="integer" />
+    </declare-styleable>
 </resources>

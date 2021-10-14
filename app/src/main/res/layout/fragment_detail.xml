@@ -7,9 +7,15 @@
 
         <import type="android.view.View.OnClickListener" />
 
+        <import type="java.util.List" />
+
         <variable
             name="onClickListener"
             type="OnClickListener" />
+
+        <variable
+            name="carouselItemList"
+            type="List&lt;String&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,16 +23,16 @@
         android:layout_height="match_parent"
         tools:context=".ui.detail.DetailFragment">
 
-        <Button
-            android:id="@+id/button_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{(v) -> onClickListener.onClick(v)}"
-            android:text="@string/previous"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <com.kyawhut.codetest.ui.component.ComponentCarousel
+            android:id="@+id/view_carousel"
+            carouselItem="@{carouselItemList}"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            app:autoSlide="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:sliderMilli="3000" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
