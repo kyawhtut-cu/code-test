@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">CodeTest</string>
     <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="action_cart">Cart</string>
+    <string name="action_share">Share</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="sale_fragment_label">Sale Fragment</string>
+    <string name="sale_fragment_label">Sale: Up to 50% Off*</string>
     <string name="detail_fragment_label">Detail Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>

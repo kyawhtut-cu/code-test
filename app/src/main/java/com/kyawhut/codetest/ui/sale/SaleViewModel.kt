@@ -4,6 +4,7 @@ import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.kyawhut.codetest.base.BaseViewModel
+import com.kyawhut.codetest.data.network.response.ProductResponse
 import com.kyawhut.codetest.rv.adapter.SaleAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -24,9 +25,12 @@ class SaleViewModel @Inject constructor(
     val loadingState: MutableLiveData<Boolean> = MutableLiveData(false)
     val totalItemCount: MutableLiveData<Int> = MutableLiveData(0)
 
+    var openDetailScreen: ((Int, ProductResponse.Data) -> Unit)? = null
+
     val saleAdapter: SaleAdapter by lazy {
         SaleAdapter(
             itemClickListener = { pos, item ->
+                openDetailScreen?.invoke(pos, item)
             },
             onFavoriteClickListener = { pos, item ->
                 Toast.makeText(application, "Clicked Favorite => $pos", Toast.LENGTH_LONG).show()

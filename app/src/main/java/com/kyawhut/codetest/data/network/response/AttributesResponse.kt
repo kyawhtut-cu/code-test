@@ -125,4 +125,7 @@ data class AttributesResponse(
     val translatedName: TranslateResponse?,
     @SerializedName("sap-sku")
     val sapSKU: String?,
-)
+) {
+    val discountRate: String
+        get() = saleText?.replace("OFF", "") ?: ""
+}
