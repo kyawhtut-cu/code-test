@@ -21,6 +21,10 @@
         android:label="@string/detail_fragment_label"
         tools:layout="@layout/fragment_detail">
 
+        <argument
+            android:name="product_model"
+            app:argType="com.kyawhut.codetest.data.model.ProductModel" />
+
         <action
             android:id="@+id/action_DetailFragment_to_SaleFragment"
             app:destination="@id/sale_fragment" />

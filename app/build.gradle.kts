@@ -5,6 +5,7 @@ plugins {
     kotlinAndroid()
     kotlinKapt()
     dagger()
+    navigationSafeArgsKtx()
 }
 
 val configProperties = Properties()

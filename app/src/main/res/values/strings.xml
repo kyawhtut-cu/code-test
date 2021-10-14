@@ -21,4 +21,15 @@
     <string name="lbl_sort">Sort</string>
     <string name="lbl_filter">Filter</string>
     <string name="lbl_discount_rate">(-%s)</string>
+
+    <string name="lbl_description_title">Description</string>
+    <string name="lbl_function">Function:%s</string>
+    <string name="lbl_skin_type">Skin Type:%s</string>
+    <string name="lbl_finish">Finish:%s</string>
+    <string name="lbl_formulation">Formulation:%s</string>
+
+    <string name="lbl_what_it_is">What it is:</string>
+    <string name="lbl_what_it_does">What it does:</string>
+    <string name="lbl_add_to_bag">Add to bag</string>
+    <string name="lbl_reviews_count">%s Reviews</string>
 </resources>

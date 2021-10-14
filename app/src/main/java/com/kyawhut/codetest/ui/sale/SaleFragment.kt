@@ -12,6 +12,7 @@ import com.kyawhut.codetest.BR
 import com.kyawhut.codetest.R
 import com.kyawhut.codetest.base.BaseFragmentWithVM
 import com.kyawhut.codetest.databinding.FragmentSaleBinding
+import com.kyawhut.codetest.ui.home.HomeActivity
 import com.kyawhut.codetest.utils.extension.onLoadMoreEnd
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,7 +36,10 @@ class SaleFragment : BaseFragmentWithVM<FragmentSaleBinding, SaleViewModel>() {
         setHasOptionsMenu(true)
 
         vm.openDetailScreen = { pos, item ->
-            findNavController().navigate(R.id.action_SaleFragment_to_DetailFragment)
+            findNavController().navigate(
+                SaleFragmentDirections.actionSaleFragmentToDetailFragment(item)
+            )
+            (requireActivity() as HomeActivity).supportActionBar?.title = item.productBrandName
         }
     }
 

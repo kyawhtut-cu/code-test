@@ -1,6 +1,7 @@
 package com.kyawhut.codetest.data.model
 
 import com.kyawhut.codetest.data.network.response.ProductResponse
+import java.io.Serializable
 
 /**
  * @author kyawhtut
@@ -15,8 +16,10 @@ data class ProductModel(
     val productDiscountRate: String,
     val productRate: Float,
     val productShades: Int,
+    val productCarouselList: List<String>,
+    val productCategoryList: List<String>,
     var isFavorite: Boolean,
-) {
+) : Serializable {
     companion object {
         fun ProductResponse.Data.toProductModel(): ProductModel = ProductModel(
             attributes.defaultImageList?.get(0) ?: "",
@@ -27,6 +30,8 @@ data class ProductModel(
             attributes.saleText?.replace("OFF", "") ?: "",
             attributes.rating ?: 0f,
             attributes.variantsCount ?: 0,
+            attributes.imageList ?: listOf(),
+            attributes.cartImageList ?: listOf(),
             false
         )
     }

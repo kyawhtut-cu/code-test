@@ -5,6 +5,7 @@ object Versions {
     const val googleServiceVersion = "4.3.10"
     const val firebaseCrashlyticsVersion = "2.7.1"
     const val daggerVersion = "2.38.1"
+    const val navigationSafeArgsVersion = "2.3.5"
 
     const val compileSdkVersion = 30
     const val buildToolsVersion = "30.0.2"

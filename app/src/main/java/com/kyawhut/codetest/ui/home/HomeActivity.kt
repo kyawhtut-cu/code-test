@@ -6,6 +6,9 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.kyawhut.codetest.R
 import com.kyawhut.codetest.base.BaseActivity
 import com.kyawhut.codetest.databinding.ActivityHomeBinding
@@ -21,25 +24,29 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         findNavController(R.id.nav_host_fragment)
     }
 
+    private val appBarConfiguration: AppBarConfiguration by lazy {
+        AppBarConfiguration(navController.graph)
+    }
+
     private val navigationChangeListener: NavController.OnDestinationChangedListener by lazy {
         NavController.OnDestinationChangedListener { _, destination, _ ->
-            val title = when (destination.id) {
-                R.id.sale_fragment -> getString(R.string.sale_fragment_label)
-                R.id.detail_fragment -> getString(R.string.detail_fragment_label)
-                else -> getString(R.string.app_name)
-            }
-            vb.toolbar.title = title
+            vb.toolbar.title = destination.label
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(vb.toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
