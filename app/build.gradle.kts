@@ -13,6 +13,11 @@ val configProperties = Properties()
 configProperties.load(file("${rootDir}/local.properties").inputStream())
 val API_BASE_URL: String = configProperties.getProperty("API_BASE_URL", "")
 
+val appName = hashMapOf(
+    "debug" to "app-debug.apk",
+    "release" to "app-release.apk"
+)
+
 android {
 
     compileSdkVersion(Versions.compileSdkVersion)
@@ -68,6 +73,18 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    android.applicationVariants.all {
+        val variant = this
+        variant.outputs.map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+            .forEach { output ->
+                val buildOutputPath = "../../release/${variant.versionName}/%s"
+                output.outputFileName = String.format(
+                    buildOutputPath,
+                    appName[variant.buildType.name]
+                )
+            }
     }
 }
 
