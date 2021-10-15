@@ -25,7 +25,7 @@ class ZoomImageFragment : BaseFragment<FragmentZoomImageBinding>() {
         CategoryImageAdapter { index, item ->
             if (item.isSelected) return@CategoryImageAdapter
             vb.selectedImageURL = args.zoomImageList[index]
-            processCategoryItemSelected(index)
+            categoryImageAdapter.updateSelectedIndex(index)
         }
     }
 
@@ -43,22 +43,5 @@ class ZoomImageFragment : BaseFragment<FragmentZoomImageBinding>() {
             selectedImageURL = args.zoomImageList[args.selectedIndex]
             executePendingBindings()
         }
-    }
-
-    private fun processCategoryItemSelected(index: Int) {
-        // todo: update old selected item to unselected
-        categoryImageAdapter.update(
-            categoryImageAdapter.indexOfFirst { it.isSelected },
-            categoryImageAdapter.get { it.isSelected }.apply {
-                isSelected = false
-            }
-        )
-        // todo: update clicked item to show selected
-        categoryImageAdapter.update(
-            index,
-            categoryImageAdapter.get(index)!!.apply {
-                isSelected = true
-            }
-        )
     }
 }

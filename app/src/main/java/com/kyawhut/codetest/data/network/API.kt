@@ -12,11 +12,11 @@ interface API {
 
     @GET("v2.5/products")
     suspend fun getProductList(
-        @Query("page[number]") page: Int = 1,
-        @Query("page[size]") perPage: Int = 30,
-        @Query("include") include: String = "featured_variant,featured_ad",
-        @Query("filter[landing_page]") filterPage: String = "sale",
-        @Query("include") includeOption: String = "brand,option_types.option_values,featured_variant,featured_ad",
-        @Query("sort") sort: String = "sales",
+        @Query("page[number]") page: Int,
+        @Query("page[size]") perPage: Int,
+        @Query("include") include: String,
+        @Query("filter[landing_page]") filterPage: String,
+        @Query("include") includeOption: String,
+        @Query("sort") sort: String,
     ): ProductResponse
 }

@@ -109,8 +109,8 @@ dependencies {
     kapt(Libs.hiltAndroidCompiler)
 
     // ViewModel and LiveData
-    api(Libs.lifeCycleExt)
-    api(Libs.fragmentKtx)
+    implementation(Libs.lifeCycleExt)
+    implementation(Libs.fragmentKtx)
 
     implementation(Libs.retrofit)
     implementation(Libs.okhttp)
@@ -124,12 +124,4 @@ dependencies {
 
     //Timber(Logging)
     implementation(Libs.timber)
-
-    // Room
-    implementation(Libs.roomKtx)
-    implementation(Libs.roomRuntime)
-    kapt(Libs.roomCompiler)
-    // RxJava support for Room
-    implementation(Libs.roomRxJava)
-
 }
