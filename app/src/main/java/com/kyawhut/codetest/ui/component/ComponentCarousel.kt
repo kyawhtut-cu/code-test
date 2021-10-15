@@ -70,11 +70,17 @@ class ComponentCarousel @JvmOverloads constructor(
 
     var isEnableAutoSlide: Boolean = false
 
-    var carouselIndex: Int = 0
+    private var carouselIndex: Int = 0
         set(value) {
             field = value
-            if (carouselIndex > adapter.itemCount) return
+            if (value > adapter.itemCount) return
             vb.vpCarousel.setCurrentItem(value, true)
+        }
+
+    var currentItem: Int
+        get() = vb.vpCarousel.currentItem
+        set(value) {
+            carouselIndex = value
         }
 
     var sliderMilli: Long = DEFAULT_TIMER

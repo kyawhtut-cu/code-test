@@ -9,6 +9,8 @@
 
         <import type="com.kyawhut.codetest.ui.detail.DetailViewModel" />
 
+        <import type="com.kyawhut.codetest.data.model.ProductModel" />
+
         <import type="com.kyawhut.codetest.rv.adapter.CategoryImageAdapter" />
 
         <import type="com.kyawhut.codetest.utils.binding.ViewBindingUtils.LayoutType" />
@@ -18,8 +20,12 @@
             type="OnClickListener" />
 
         <variable
-            name="vm"
+            name="viewModel"
             type="DetailViewModel" />
+
+        <variable
+            name="productModel"
+            type="ProductModel" />
 
         <variable
             name="isFavorite"
@@ -53,7 +59,7 @@
 
                 <com.kyawhut.codetest.ui.component.ComponentCarousel
                     android:id="@+id/view_carousel"
-                    carouselItem="@{vm.productModel.productCarouselList}"
+                    carouselItem="@{productModel.productCarouselList}"
                     android:layout_width="0dp"
                     android:layout_height="350dp"
                     app:autoSlide="false"
@@ -106,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/margin_medium_2"
-                    android:text="@{vm.productModel.productBrandName}"
+                    android:text="@{productModel.productBrandName}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     android:textStyle="bold"
@@ -121,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="@dimen/margin_medium_2"
-                    android:text="@{vm.productModel.productName}"
+                    android:text="@{productModel.productName}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +140,7 @@
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:rating="@{vm.productModel.productRate}"
+                    android:rating="@{productModel.productRate}"
                     android:theme="@style/ItemRating"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_rate_count"
                     app:layout_constraintEnd_toStartOf="@+id/tv_rate_count"
@@ -150,7 +156,7 @@
                     android:layout_marginStart="@dimen/margin_medium"
                     android:background="@drawable/bg_rate_count"
                     android:gravity="center"
-                    android:text="@{String.format(@string/lbl_reviews_count, vm.productModel.productReviewCount)}"
+                    android:text="@{String.format(@string/lbl_reviews_count, productModel.productReviewCount)}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +171,7 @@
                     android:layout_marginStart="@dimen/margin_medium_2"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:background="@drawable/bg_txt_strike"
-                    android:text="@{vm.productModel.productOriginalPrice}"
+                    android:text="@{productModel.productOriginalPrice}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     app:layout_constraintEnd_toStartOf="@+id/tv_discount_price"
@@ -181,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/margin_medium"
                     android:paddingEnd="@dimen/margin_small"
-                    android:text="@{vm.productModel.productDiscountPrice}"
+                    android:text="@{productModel.productDiscountPrice}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     android:textStyle="bold"
@@ -197,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_medium_2"
                     android:paddingHorizontal="@dimen/margin_small"
-                    android:text="@{String.format(@string/lbl_discount_rate, vm.productModel.productDiscountRate)}"
+                    android:text="@{String.format(@string/lbl_discount_rate, productModel.productDiscountRate)}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     android:textStyle="bold"
@@ -349,7 +355,7 @@
                     android:gravity="center"
                     android:onClick="@{(v) -> onClickListener.onClick(v)}"
                     android:paddingHorizontal="@dimen/margin_medium_2"
-                    android:text="@{vm.orderCount.toString()}"
+                    android:text="@{viewModel.orderCount.toString()}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_regular_2x"
                     app:drawableEndCompat="@drawable/ic_count_drop_down"

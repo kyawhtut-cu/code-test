@@ -21,6 +21,7 @@ data class ProductModel(
     val productReviewCount: Int,
     val productCarouselList: List<String>,
     val productCategoryList: List<String>,
+    val productZoomImageList: List<String>,
     var isFavorite: Boolean,
 ) : Serializable {
     companion object {
@@ -38,6 +39,7 @@ data class ProductModel(
             attributes.reviewsCount ?: 0,
             attributes.imageList ?: listOf(),
             attributes.cartImageList ?: listOf(),
+            attributes.zoomImageList ?: listOf(),
             false
         )
     }
