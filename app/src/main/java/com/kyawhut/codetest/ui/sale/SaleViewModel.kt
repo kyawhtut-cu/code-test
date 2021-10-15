@@ -3,6 +3,7 @@ package com.kyawhut.codetest.ui.sale
 import androidx.lifecycle.MutableLiveData
 import com.kyawhut.codetest.base.BaseViewModel
 import com.kyawhut.codetest.data.model.ProductModel
+import com.kyawhut.codetest.data.network.request.productRequest
 import com.kyawhut.codetest.rv.adapter.SaleAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -41,7 +42,11 @@ class SaleViewModel @Inject constructor(private val repository: SaleRepository) 
 
     private fun fetchProductList() {
         viewModelScope {
-            repository.fetchSaleList(page) {
+            repository.fetchSaleList(
+                productRequest {
+                    page = this@SaleViewModel.page
+                }
+            ) {
                 loadingState.postValue(it.isLoading)
                 if (it.isSuccess) {
                     if (page == 1) saleAdapter.clear()

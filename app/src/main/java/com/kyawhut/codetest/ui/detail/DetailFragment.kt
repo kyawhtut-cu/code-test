@@ -44,7 +44,7 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
         CategoryImageAdapter { index, item ->
             if (item.isSelected) return@CategoryImageAdapter
             vb.viewCarousel.currentItem = index
-            processCategoryItemSelected(index)
+            categoryAdapter.updateSelectedIndex(index)
         }
     }
 
@@ -70,7 +70,7 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
             isFavorite = args.productModel.isFavorite
             categoryAdapter = this@DetailFragment.categoryAdapter
             viewCarousel.setOnCarouselChangeListener {
-                processCategoryItemSelected(it)
+                this@DetailFragment.categoryAdapter.updateSelectedIndex(it)
             }
             tvFunction.text = getSpannableString(
                 getString(R.string.lbl_function),
@@ -98,23 +98,6 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
             )
             executePendingBindings()
         }
-    }
-
-    private fun processCategoryItemSelected(index: Int) {
-        // todo: update old selected item to unselected
-        categoryAdapter.update(
-            categoryAdapter.indexOfFirst { it.isSelected },
-            categoryAdapter.get { it.isSelected }.apply {
-                isSelected = false
-            }
-        )
-        // todo: update clicked item to show selected
-        categoryAdapter.update(
-            index,
-            categoryAdapter.get(index)!!.apply {
-                isSelected = true
-            }
-        )
     }
 
     private fun getSpannableString(firstString: String, secondString: String): SpannableString {

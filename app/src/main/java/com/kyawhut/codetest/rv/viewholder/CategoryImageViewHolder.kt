@@ -1,4 +1,4 @@
-package com.kyawhut.codetest.rv.adapter
+package com.kyawhut.codetest.rv.viewholder
 
 import com.kyawhut.codetest.base.BaseViewHolder
 import com.kyawhut.codetest.data.model.CategoryImageModel
