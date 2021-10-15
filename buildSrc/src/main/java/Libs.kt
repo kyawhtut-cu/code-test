@@ -6,6 +6,7 @@ object Libs {
     const val firebaseCrashlyticsService =
         "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlyticsVersion}"
     const val dagger = "com.google.dagger:hilt-android-gradle-plugin:${Versions.daggerVersion}"
+    const val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationSafeArgsVersion}"
 
     const val junit = "junit:junit:${Versions.junitVersion}"
     const val testJunit = "androidx.test.ext:junit:${Versions.testJunitVersion}"

@@ -1,6 +1,7 @@
 package com.kyawhut.codetest.ui.sale
 
-import com.kyawhut.codetest.data.network.response.ProductResponse
+import com.kyawhut.codetest.data.model.ProductModel
+import com.kyawhut.codetest.data.network.response.MetaResponse
 import com.kyawhut.codetest.utils.network.NetworkResponse
 
 /**
@@ -9,5 +10,8 @@ import com.kyawhut.codetest.utils.network.NetworkResponse
  */
 interface SaleRepository {
 
-    suspend fun fetchSaleList(page: Int, callback: (NetworkResponse<ProductResponse>) -> Unit)
+    suspend fun fetchSaleList(
+        page: Int,
+        callback: (NetworkResponse<Pair<List<ProductModel>, MetaResponse>>) -> Unit
+    )
 }

@@ -56,9 +56,9 @@ data class AttributesResponse(
     @SerializedName("sold-out")
     val soldOut: Boolean?,
     @SerializedName("rating")
-    val rating: Float,
+    val rating: Float?,
     @SerializedName("variants-count")
-    val variantsCount: Int,
+    val variantsCount: Int?,
     @SerializedName("description")
     val description: String?,
     @SerializedName("how-to-text")
@@ -125,7 +125,4 @@ data class AttributesResponse(
     val translatedName: TranslateResponse?,
     @SerializedName("sap-sku")
     val sapSKU: String?,
-) {
-    val discountRate: String
-        get() = saleText?.replace("OFF", "") ?: ""
-}
+)

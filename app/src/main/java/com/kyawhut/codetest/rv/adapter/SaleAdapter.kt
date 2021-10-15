@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.kyawhut.codetest.R
 import com.kyawhut.codetest.base.BaseAdapter
 import com.kyawhut.codetest.base.BaseViewHolder
-import com.kyawhut.codetest.data.network.response.ProductResponse
+import com.kyawhut.codetest.data.model.ProductModel
 import com.kyawhut.codetest.rv.viewholder.SaleViewHolder
 
 /**
@@ -14,14 +14,14 @@ import com.kyawhut.codetest.rv.viewholder.SaleViewHolder
  * @date 10/13/21
  */
 class SaleAdapter(
-    itemClickListener: (Int, ProductResponse.Data) -> Unit = { _, _ -> },
-    private val onFavoriteClickListener: (Int, ProductResponse.Data) -> Unit,
-) : BaseAdapter<ProductResponse.Data>(itemClickListener) {
+    itemClickListener: (Int, ProductModel) -> Unit = { _, _ -> },
+    private val onFavoriteClickListener: (Int, ProductModel) -> Unit,
+) : BaseAdapter<ProductModel>(itemClickListener) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<*, ProductResponse.Data> {
+    ): BaseViewHolder<*, ProductModel> {
         return SaleViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),

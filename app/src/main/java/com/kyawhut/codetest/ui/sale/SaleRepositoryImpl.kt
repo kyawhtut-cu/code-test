@@ -1,7 +1,9 @@
 package com.kyawhut.codetest.ui.sale
 
+import com.kyawhut.codetest.data.model.ProductModel
+import com.kyawhut.codetest.data.model.ProductModel.Companion.toProductModel
 import com.kyawhut.codetest.data.network.API
-import com.kyawhut.codetest.data.network.response.ProductResponse
+import com.kyawhut.codetest.data.network.response.MetaResponse
 import com.kyawhut.codetest.utils.network.NetworkResponse
 import com.kyawhut.codetest.utils.network.execute
 import javax.inject.Inject
@@ -14,14 +16,16 @@ class SaleRepositoryImpl @Inject constructor(private val api: API) : SaleReposit
 
     override suspend fun fetchSaleList(
         page: Int,
-        callback: (NetworkResponse<ProductResponse>) -> Unit
+        callback: (NetworkResponse<Pair<List<ProductModel>, MetaResponse>>) -> Unit
     ) {
         NetworkResponse.loading(callback)
         val response = execute {
             api.getProductList(page)
         }
         if (response.isSuccess) {
-            response.post(callback)
-        } else response.post(callback)
+            NetworkResponse.success((response.data?.productList?.map {
+                it.toProductModel()
+            } ?: listOf()) to response.data?.meta!!, callback)
+        } else NetworkResponse.error(response.error, callback)
     }
 }

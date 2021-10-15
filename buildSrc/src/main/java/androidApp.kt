@@ -13,6 +13,10 @@ fun PluginDependenciesSpec.kotlinExtension(): PluginDependencySpec = kotlin("and
 
 fun PluginDependenciesSpec.dagger(): PluginDependencySpec = id("dagger.hilt.android.plugin")
 
+fun PluginDependenciesSpec.navigationSafeArgs(): PluginDependencySpec = id("androidx.navigation.safeargs")
+
+fun PluginDependenciesSpec.navigationSafeArgsKtx(): PluginDependencySpec = id("androidx.navigation.safeargs.kotlin")
+
 fun PluginDependenciesSpec.library(): PluginDependencySpec = id("com.android.library")
 
 fun PluginDependenciesSpec.googleService(): PluginDependencySpec =

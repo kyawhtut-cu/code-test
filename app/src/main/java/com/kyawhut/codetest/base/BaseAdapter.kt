@@ -43,11 +43,24 @@ abstract class BaseAdapter<D>(
 
     fun update(index: Int, data: D) {
         itemList.removeAt(index)
-        addItem(index, data)
+        itemList.add(index, data)
+        notifyItemChanged(index)
     }
 
     fun get(index: Int): D? {
         return itemList[index]
+    }
+
+    fun get(predicate: (D) -> Boolean): D {
+        return itemList.first(predicate)
+    }
+
+    fun indexOf(data: D): Int {
+        return itemList.indexOf(data)
+    }
+
+    fun indexOfFirst(predicate: (D) -> Boolean): Int {
+        return itemList.indexOfFirst(predicate)
     }
 
     fun clear() {

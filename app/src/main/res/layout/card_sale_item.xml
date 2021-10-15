@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".rv.viewholder.SaleViewHolder">
 
     <data>
 
-        <import type="com.kyawhut.codetest.data.network.response.ProductResponse.Data" />
+        <import type="com.kyawhut.codetest.data.model.ProductModel" />
 
         <import type="android.view.View.OnClickListener" />
 
         <variable
             name="product"
-            type="Data" />
+            type="ProductModel" />
 
         <variable
             name="onClickListener"
@@ -25,7 +26,7 @@
 
         <ImageView
             android:id="@+id/iv_product"
-            imageURL="@{product.attributes.defaultImageList[0]}"
+            imageURL="@{product.productImage}"
             android:layout_width="0dp"
             android:layout_height="180dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,9 +41,10 @@
             android:background="?actionBarItemBackground"
             android:onClick="@{(v) -> onClickListener.onClick(v)}"
             android:padding="@dimen/margin_medium_2"
+            android:src="@{product.isFavorite ? @drawable/ic_remove_from_fav : @drawable/ic_add_to_fav}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_product"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add_to_fav" />
+            tools:src="@drawable/ic_add_to_fav" />
 
         <TextView
             android:id="@+id/tv_brand_name"
@@ -51,7 +53,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:padding="@dimen/margin_medium"
-            android:text="@{product.attributes.brandName}"
+            android:text="@{product.productBrandName}"
             android:textColor="?textColor"
             android:textSize="@dimen/text_regular_2x"
             android:textStyle="bold"
@@ -67,7 +69,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:padding="@dimen/margin_medium"
-            android:text="@{product.attributes.name}"
+            android:text="@{product.productName}"
             android:textColor="?textColor"
             android:textSize="@dimen/text_regular_2x"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,9 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@drawable/bg_txt_strike"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="@{product.attributes.displayOriginalPrice}"
+            android:text="@{product.productOriginalPrice}"
             android:textColor="?textColor"
             android:textSize="@dimen/text_regular_2x"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,11 +94,9 @@
             android:id="@+id/tv_discount_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
             android:paddingStart="@dimen/margin_medium"
             android:paddingEnd="@dimen/margin_small"
-            android:text="@{product.attributes.displayPrice}"
+            android:text="@{product.productDiscountPrice}"
             android:textColor="?textColor"
             android:textSize="@dimen/text_regular_2x"
             android:textStyle="bold"
@@ -110,10 +108,8 @@
             android:id="@+id/tv_discount_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
             android:paddingHorizontal="@dimen/margin_small"
-            android:text="@{String.format(@string/lbl_discount_rate, product.attributes.discountRate)}"
+            android:text="@{String.format(@string/lbl_discount_rate, product.productDiscountRate)}"
             android:textColor="@color/colorDiscountRate"
             android:textSize="@dimen/text_regular_2x"
             android:textStyle="bold"
@@ -128,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
             android:max="5"
-            android:rating="@{product.attributes.rating}"
+            android:rating="@{product.productRate}"
             android:theme="@style/ItemRating"
             app:layout_constraintStart_toStartOf="@+id/tv_original_price"
             app:layout_constraintTop_toBottomOf="@+id/tv_original_price"
@@ -139,10 +135,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:alpha="0.5"
-            android:ellipsize="end"
-            android:maxLines="2"
             android:padding="@dimen/margin_medium"
-            android:text="@{product.attributes.variantsCount + ` shades`}"
+            android:text="@{product.productShades + ` shades`}"
             android:textColor="@color/black"
             android:textSize="@dimen/text_regular_2x"
             app:layout_constraintEnd_toEndOf="parent"
