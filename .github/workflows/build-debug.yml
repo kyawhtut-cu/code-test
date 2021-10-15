@@ -53,5 +53,5 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: app-debug.apk
-          path: app/build/outputs/apk/release/${{ env.RELEASE_VERSION }}/app-debug.apk
+          path: app/build/outputs/release/${{ env.RELEASE_VERSION }}/app-debug.apk
           retention-days: 5
