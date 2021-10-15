@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.kyawhut.codetest.BR
 import com.kyawhut.codetest.R
 import com.kyawhut.codetest.base.BaseFragmentWithVM
@@ -37,6 +38,8 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
 
     override val vm: DetailViewModel by viewModels()
 
+    private val args: DetailFragmentArgs by navArgs()
+
     private val categoryAdapter: CategoryImageAdapter by lazy {
         CategoryImageAdapter { index, item ->
             if (item.isSelected) return@CategoryImageAdapter
@@ -52,22 +55,19 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (vm.productModel == null) {
-            findNavController().popBackStack()
-            return
-        }
 
         (requireActivity() as HomeActivity).supportActionBar?.title =
-            vm.productModel!!.productBrandName
+            args.productModel.productBrandName
 
         categoryAdapter.clear()
-        categoryAdapter.addAll(vm.productModel!!.productCategoryList.mapIndexed { index, s ->
+        categoryAdapter.addAll(args.productModel.productCategoryList.mapIndexed { index, s ->
             CategoryImageModel(s, index == 0)
         })
 
         vb.apply {
-            vm = this@DetailFragment.vm
-            isFavorite = this@DetailFragment.vm.productModel!!.isFavorite
+            viewModel = vm
+            productModel = args.productModel
+            isFavorite = args.productModel.isFavorite
             categoryAdapter = this@DetailFragment.categoryAdapter
             viewCarousel.setOnCarouselChangeListener {
                 processCategoryItemSelected(it)
@@ -89,11 +89,11 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
                 getString(R.string.lbl_formulation_dummy)
             )
             tvWhatItIs.text = HtmlCompat.fromHtml(
-                this@DetailFragment.vm.productModel!!.productDescription,
+                args.productModel.productDescription,
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
             tvWhatItDoes.text = HtmlCompat.fromHtml(
-                this@DetailFragment.vm.productModel!!.productHowToText,
+                args.productModel.productHowToText,
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
             executePendingBindings()
@@ -133,8 +133,8 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
     override fun onClick(v: View) {
         when (v.id) {
             R.id.action_add_to_fav -> {
-                vm.productModel!!.isFavorite = !vm.productModel!!.isFavorite
-                vb.isFavorite = vm.productModel!!.isFavorite
+                args.productModel.isFavorite = args.productModel.isFavorite
+                vb.isFavorite = args.productModel.isFavorite
             }
             R.id.action_order_count -> {
                 showPopupMenuBuilder(
@@ -151,9 +151,9 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
             R.id.action_zoom -> {
                 findNavController().navigate(
                     DetailFragmentDirections.detailToZoomImage(
-                        vm.productModel!!.productZoomImageList.toTypedArray(),
-                        vm.productModel!!.productCategoryList.toTypedArray(),
-                        vm.productModel!!.productBrandName,
+                        args.productModel.productZoomImageList.toTypedArray(),
+                        args.productModel.productCategoryList.toTypedArray(),
+                        args.productModel.productBrandName,
                         vb.viewCarousel.currentItem
                     )
                 )
