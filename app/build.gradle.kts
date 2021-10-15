@@ -6,6 +6,7 @@ plugins {
     kotlinKapt()
     dagger()
     navigationSafeArgsKtx()
+    androidGitVersion()
 }
 
 val configProperties = Properties()
@@ -25,7 +26,7 @@ android {
         targetSdkVersion(Versions.targetSdkVersion)
 
         versionCode = 1
-        versionName = "1.0"
+        versionName = androidGitVersion.name()
 
         multiDexEnabled = true
 
