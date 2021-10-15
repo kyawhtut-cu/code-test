@@ -39,7 +39,6 @@ class SaleFragment : BaseFragmentWithVM<FragmentSaleBinding, SaleViewModel>() {
             findNavController().navigate(
                 SaleFragmentDirections.actionSaleFragmentToDetailFragment(item)
             )
-            (requireActivity() as HomeActivity).supportActionBar?.title = item.productBrandName
         }
     }
 

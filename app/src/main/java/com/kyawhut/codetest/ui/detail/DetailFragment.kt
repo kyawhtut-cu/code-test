@@ -17,6 +17,7 @@ import com.kyawhut.codetest.base.BaseFragmentWithVM
 import com.kyawhut.codetest.data.model.CategoryImageModel
 import com.kyawhut.codetest.databinding.FragmentDetailBinding
 import com.kyawhut.codetest.rv.adapter.CategoryImageAdapter
+import com.kyawhut.codetest.ui.home.HomeActivity
 import com.kyawhut.codetest.ui.popup.showPopupMenuBuilder
 import com.kyawhut.codetest.utils.extension.Extension.getColor
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +40,7 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
     private val categoryAdapter: CategoryImageAdapter by lazy {
         CategoryImageAdapter { index, item ->
             if (item.isSelected) return@CategoryImageAdapter
-            vb.viewCarousel.carouselIndex = index
+            vb.viewCarousel.currentItem = index
             processCategoryItemSelected(index)
         }
     }
@@ -56,6 +57,10 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
             return
         }
 
+        (requireActivity() as HomeActivity).supportActionBar?.title =
+            vm.productModel!!.productBrandName
+
+        categoryAdapter.clear()
         categoryAdapter.addAll(vm.productModel!!.productCategoryList.mapIndexed { index, s ->
             CategoryImageModel(s, index == 0)
         })
@@ -142,6 +147,16 @@ class DetailFragment : BaseFragmentWithVM<FragmentDetailBinding, DetailViewModel
                 }.show(v)
             }
             R.id.action_add_to_bag -> {
+            }
+            R.id.action_zoom -> {
+                findNavController().navigate(
+                    DetailFragmentDirections.detailToZoomImage(
+                        vm.productModel!!.productZoomImageList.toTypedArray(),
+                        vm.productModel!!.productCategoryList.toTypedArray(),
+                        vm.productModel!!.productBrandName,
+                        vb.viewCarousel.currentItem
+                    )
+                )
             }
         }
     }

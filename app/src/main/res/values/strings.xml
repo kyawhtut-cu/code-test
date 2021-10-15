@@ -7,6 +7,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="sale_fragment_label">Sale: Up to 50% Off*</string>
     <string name="detail_fragment_label">Detail Fragment</string>
+    <string name="zoom_image_fragment_label">Zoom Image Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 

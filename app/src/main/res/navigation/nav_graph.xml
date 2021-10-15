@@ -28,5 +28,26 @@
         <action
             android:id="@+id/action_DetailFragment_to_SaleFragment"
             app:destination="@id/sale_fragment" />
+        <action
+            android:id="@+id/detail_to_zoom_image"
+            app:destination="@id/zoom_image_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/zoom_image_fragment"
+        android:name="com.kyawhut.codetest.ui.zoom.ZoomImageFragment"
+        android:label="@string/zoom_image_fragment_label"
+        tools:layout="@layout/fragment_zoom_image">
+        <argument
+            android:name="zoom_image_list"
+            app:argType="string[]" />
+        <argument
+            android:name="category_image_list"
+            app:argType="string[]" />
+        <argument
+            android:name="brand_name"
+            app:argType="string" />
+        <argument
+            android:name="selected_index"
+            app:argType="integer" />
     </fragment>
 </navigation>
