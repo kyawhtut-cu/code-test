@@ -17,10 +17,12 @@ Use of support lib
  > [timber](https://github.com/JakeWharton/timber) - logging
  > 
  > [material android](https://github.com/material-components/material-components-android)
+ >
+ > [github-action](https://github.com/features/actions) - that is use for CI/CD
 
 Screenshot
 -
-  ![Splash Screen](screenshot/home.jpg)
-  ![Splash Screen](screenshot/detail.jpg)
-  ![Splash Screen](screenshot/image-zoom.jpg)
+  HomePage|Detail Page|Zoom Image
+  :-------------------------:|:-------------------------:|:-------------------------:
+  ![Home Screen](screenshot/home.jpg)|![Detail Screen](screenshot/detail.jpg)|![Image Zoom Screen](screenshot/image-zoom.jpg)
   
