@@ -1,0 +1,57 @@
+name: Build Debug App
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+
+  build_start:
+
+    name: Build Start
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check Out Branch
+        uses: actions/checkout@v2.3.4
+
+      - name: Tag Version
+        run: |
+          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+  build_debug:
+
+    needs: build_start
+    name: Build Debug
+    runs-on: ubuntu-18.04
+    env:
+      API_BASE_URL: ${{ secrets.API_BASE_URL }}
+
+    steps:
+
+      - name: Check Out Branch
+        uses: actions/checkout@v2.3.4
+
+      - run: touch local.properties
+      - run: echo -e "\nAPI_BASE_URL=$API_BASE_URL" >> local.properties
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Tag Version
+        run: |
+          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Build App Debug
+        run: ./gradlew app:assembleDebug
+
+      - name: Upload build app to artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-debug.apk
+          path: @app/build/outputs/apk/release/${{ env.RELEASE_VERSION }}/app-debug.apk
+          retention-days: 5
