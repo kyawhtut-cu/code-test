@@ -124,4 +124,11 @@ dependencies {
 
     //Timber(Logging)
     implementation(Libs.timber)
+
+    // Room
+    implementation(Libs.roomKtx)
+    implementation(Libs.roomRuntime)
+    kapt(Libs.roomCompiler)
+    // RxJava support for Room
+    implementation(Libs.roomRxJava)
 }
