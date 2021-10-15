@@ -51,6 +51,18 @@ abstract class BaseAdapter<D>(
         return itemList[index]
     }
 
+    fun get(predicate: (D) -> Boolean): D {
+        return itemList.first(predicate)
+    }
+
+    fun indexOf(data: D): Int {
+        return itemList.indexOf(data)
+    }
+
+    fun indexOfFirst(predicate: (D) -> Boolean): Int {
+        return itemList.indexOfFirst(predicate)
+    }
+
     fun clear() {
         val totalCount = itemList.size
         itemList.clear()

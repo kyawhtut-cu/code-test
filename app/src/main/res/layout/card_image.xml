@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="imageURL"
+            type="String" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="76dp"
         android:layout_height="76dp"
@@ -10,9 +17,10 @@
 
         <ImageView
             android:id="@+id/iv_image"
+            imageURL="@{imageURL}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="2dp"
+            android:layout_margin="@dimen/margin_medium"
             android:adjustViewBounds="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

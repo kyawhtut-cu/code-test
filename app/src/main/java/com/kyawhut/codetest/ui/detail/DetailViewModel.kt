@@ -1,5 +1,6 @@
 package com.kyawhut.codetest.ui.detail
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.kyawhut.codetest.base.BaseViewModel
 import com.kyawhut.codetest.data.model.ProductModel
@@ -18,4 +19,6 @@ class DetailViewModel @Inject constructor(
     val productModel: ProductModel? by lazy {
         savedStateHandle.get("product_model") as ProductModel?
     }
+
+    val orderCount: MutableLiveData<Int> = MutableLiveData(1)
 }

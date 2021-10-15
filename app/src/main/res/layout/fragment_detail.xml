@@ -7,15 +7,27 @@
 
         <import type="android.view.View.OnClickListener" />
 
-        <import type="com.kyawhut.codetest.data.model.ProductModel" />
+        <import type="com.kyawhut.codetest.ui.detail.DetailViewModel" />
+
+        <import type="com.kyawhut.codetest.rv.adapter.CategoryImageAdapter" />
+
+        <import type="com.kyawhut.codetest.utils.binding.ViewBindingUtils.LayoutType" />
 
         <variable
             name="onClickListener"
             type="OnClickListener" />
 
         <variable
-            name="product"
-            type="ProductModel" />
+            name="vm"
+            type="DetailViewModel" />
+
+        <variable
+            name="isFavorite"
+            type="Boolean" />
+
+        <variable
+            name="categoryAdapter"
+            type="CategoryImageAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,10 +53,10 @@
 
                 <com.kyawhut.codetest.ui.component.ComponentCarousel
                     android:id="@+id/view_carousel"
-                    carouselItem="@{product.productCarouselList}"
+                    carouselItem="@{vm.productModel.productCarouselList}"
                     android:layout_width="0dp"
                     android:layout_height="350dp"
-                    app:autoSlide="true"
+                    app:autoSlide="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -68,15 +80,19 @@
                     android:background="@drawable/bg_detail_action"
                     android:onClick="@{(v) -> onClickListener.onClick(v)}"
                     android:padding="@dimen/margin_medium_2"
+                    android:src="@{isFavorite ? @drawable/ic_remove_from_fav : @drawable/ic_add_to_fav}"
                     app:layout_constraintBottom_toBottomOf="@+id/view_carousel"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_add_to_fav" />
+                    tools:src="@drawable/ic_add_to_fav" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_image"
+                    adapter="@{categoryAdapter}"
+                    layoutManger="@{LayoutType.HORIZONTAL_LAYOUT}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/margin_medium_2"
-                    android:text="@{product.productBrandName}"
+                    android:text="@{vm.productModel.productBrandName}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     android:textStyle="bold"
@@ -105,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="@dimen/margin_medium_2"
-                    android:text="@{product.productName}"
+                    android:text="@{vm.productModel.productName}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +134,7 @@
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:rating="@{product.productRate}"
+                    android:rating="@{vm.productModel.productRate}"
                     android:theme="@style/ItemRating"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_rate_count"
                     app:layout_constraintEnd_toStartOf="@+id/tv_rate_count"
@@ -134,7 +150,7 @@
                     android:layout_marginStart="@dimen/margin_medium"
                     android:background="@drawable/bg_rate_count"
                     android:gravity="center"
-                    android:text="@{String.format(@string/lbl_reviews_count, 1)}"
+                    android:text="@{String.format(@string/lbl_reviews_count, vm.productModel.productReviewCount)}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +165,7 @@
                     android:layout_marginStart="@dimen/margin_medium_2"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:background="@drawable/bg_txt_strike"
-                    android:text="@{product.productOriginalPrice}"
+                    android:text="@{vm.productModel.productOriginalPrice}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     app:layout_constraintEnd_toStartOf="@+id/tv_discount_price"
@@ -165,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/margin_medium"
                     android:paddingEnd="@dimen/margin_small"
-                    android:text="@{product.productDiscountPrice}"
+                    android:text="@{vm.productModel.productDiscountPrice}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     android:textStyle="bold"
@@ -181,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_medium_2"
                     android:paddingHorizontal="@dimen/margin_small"
-                    android:text="@{String.format(@string/lbl_discount_rate, product.productDiscountRate)}"
+                    android:text="@{String.format(@string/lbl_discount_rate, vm.productModel.productDiscountRate)}"
                     android:textColor="?textColor"
                     android:textSize="@dimen/text_regular_2x"
                     android:textStyle="bold"
@@ -333,6 +349,7 @@
                     android:gravity="center"
                     android:onClick="@{(v) -> onClickListener.onClick(v)}"
                     android:paddingHorizontal="@dimen/margin_medium_2"
+                    android:text="@{vm.orderCount.toString()}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_regular_2x"
                     app:drawableEndCompat="@drawable/ic_count_drop_down"
@@ -345,7 +362,7 @@
                     android:id="@+id/action_add_to_bag"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:background="@color/colorDiscountRate"
+                    android:background="@drawable/bg_add_to_bag"
                     android:gravity="center"
                     android:onClick="@{(v) -> onClickListener.onClick(v)}"
                     android:text="@string/lbl_add_to_bag"
